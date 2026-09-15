@@ -1,0 +1,22 @@
+{
+  "name": "ximplex-monorepo",
+  "version": "1.0.0",
+  "description": "Ximplex monorepo - Landing + 36 apps",
+  "private": true,
+  "packageManager": "npm@10.0.0",
+  "workspaces": [
+    "packages/core",
+    "packages/ximplex-web",
+    "packages/formix",
+    "packages/ximplex-dashboard"
+  ],
+  "scripts": {
+    "dev": "turbo run dev --parallel",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "type-check": "turbo run type-check"
+  },
+  "devDependencies": {
+    "turbo": "latest"
+  }
+}

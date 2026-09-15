@@ -1,0 +1,13 @@
+{
+  "name": "@ximplex/core",
+  "version": "1.0.0",
+  "description": "Código compartido - Auth, Stripe, DB, Componentes",
+  "private": true,
+  "main": "index.ts",
+  "exports": {
+    "./stripe": "./stripe/index.ts",
+    "./auth": "./auth/index.ts",
+    "./db": "./db/index.ts",
+    "./types": "./types/index.ts"
+  }
+}
