@@ -1,0 +1,14 @@
+
+> formix@0.1.0 build
+> next build
+
+▲ Next.js 16.3.4 (Turbopack)
+- Environments: .env.local
+⚠ Warning: Next.js ignored package.json in C:\Users\drobi\Projects\ximplex-monorepo because it is outside the current Git repository (C:\Users\drobi\Projects\ximplex-monorepo\packages\formix).
+ To use this directory, set `turbopack.root` in your Next.js config.
+
+✓ Running next.config.ts took 33ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 1366ms
+  Running TypeScript ...

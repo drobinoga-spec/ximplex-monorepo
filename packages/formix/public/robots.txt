@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /my-desk
+Disallow: /api/auth/*
+
+Sitemap: https://formix.ximplex.app/sitemap.xml
+Host: https://formix.ximplex.app

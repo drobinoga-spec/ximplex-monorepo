@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+@supports (font-variation-settings: normal) {
+  html {
+    font-family: InterVariable, system-ui, -apple-system, sans-serif;
+  }
+}
