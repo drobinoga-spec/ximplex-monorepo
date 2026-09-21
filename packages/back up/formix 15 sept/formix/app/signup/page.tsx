@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { signIn } from 'next-auth/react';
 
 export default function SignUp() {
   const [email, setEmail] = useState('');
@@ -16,7 +17,6 @@ export default function SignUp() {
     setError('');
 
     try {
-      // Call signup API
       const res = await fetch('/api/auth/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -28,8 +28,17 @@ export default function SignUp() {
         throw new Error(data.error || 'Signup failed');
       }
 
-      // Signup successful, go to wizard
-      router.push('/signup-wizard/step-1');
+      const signInResult = await signIn('credentials', {
+        email,
+        password,
+        redirect: false,
+      });
+
+      if (signInResult?.ok) {
+        router.push('/dashboard');
+      } else {
+        setError('Could not sign in after signup');
+      }
     } catch (err: any) {
       setError(err.message);
     } finally {

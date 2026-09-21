@@ -4,7 +4,11 @@
 
 ▲ Next.js 16.3.4 (Turbopack)
 - Environments: .env.local
-✓ Running next.config.ts took 53ms
+⚠ `experimental.cacheComponents` has been moved to `cacheComponents`. Please update your next.config.ts file accordingly.
+⚠ turbopack.root should be absolute, using: C:\Users\drobi\Projects\ximplex-monorepo
+✓ Running next.config.ts took 163ms
+- Experiments (use with caution):
+  ⨯ cacheComponents
 
 ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead.
 
@@ -13,49 +17,5 @@
 
   Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
   Creating an optimized production build ...
-
-> Build error occurred
-Error: Turbopack build failed with 3 errors:
-./packages/ximplex-web/app
-Error: An issue occurred while preparing your Next.js app
-Conflicting route and page at /account/billing: route at /account/billing/route and page at /account/billing/page
-
-
-./packages/ximplex-web/app/api/stripe/portal/route.ts:3:1
-Error: Export authOptions doesn't exist in target module
-  [90m1 |[0m [36mimport[0m { [33mNextRequest[0m, [33mNextResponse[0m } [36mfrom[0m [32m'next/server'[0m;
-  [90m2 |[0m [36mimport[0m { getServerSession } [36mfrom[0m [32m'next-auth/next'[0m;
-[31m[1m>[0m [90m3 |[0m [36mimport[0m { authOptions } [36mfrom[0m [32m'@/app/api/auth/[...nextauth]/route'[0m;
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m4 |[0m [36mimport[0m [33mStripe[0m [36mfrom[0m [32m'stripe'[0m;
-  [90m5 |[0m
-  [90m6 |[0m [36mconst[0m stripe = [36mnew[0m [33mStripe[0m(process.env.[33mSTRIPE_SECRET_KEY[0m!, {
-
-The export authOptions was not found in module [project]/packages/ximplex-web/app/api/auth/[...nextauth]/route.ts [app-route] (ecmascript).
-Did you mean to import auth?
-All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
-
-
-./packages/ximplex-web/app/api/stripe/portal/route.ts:2:1
-Error: Export getServerSession doesn't exist in target module
-  [90m1 |[0m [36mimport[0m { [33mNextRequest[0m, [33mNextResponse[0m } [36mfrom[0m [32m'next/server'[0m;
-[31m[1m>[0m [90m2 |[0m [36mimport[0m { getServerSession } [36mfrom[0m [32m'next-auth/next'[0m;
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m3 |[0m [36mimport[0m { authOptions } [36mfrom[0m [32m'@/app/api/auth/[...nextauth]/route'[0m;
-  [90m4 |[0m [36mimport[0m [33mStripe[0m [36mfrom[0m [32m'stripe'[0m;
-  [90m5 |[0m
-
-The export getServerSession was not found in module [project]/packages/ximplex-web/node_modules/next-auth/next.js [app-route] (ecmascript).
-The module has no exports at all.
-All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
-
-
-    at <unknown> (./packages/ximplex-web/app/api/stripe/portal/route.ts:3:1)
-    at <unknown> (./packages/ximplex-web/app/api/stripe/portal/route.ts:2:1)
-npm error Lifecycle script `build` failed with error:
-npm error code 1
-npm error path C:\Users\drobi\Projects\ximplex-monorepo\packages\ximplex-web
-npm error workspace ximplex-web@0.1.0
-npm error location C:\Users\drobi\Projects\ximplex-monorepo\packages\ximplex-web
-npm error command failed
-npm error command C:\WINDOWS\system32\cmd.exe /d /s /c next build
+✓ Compiled successfully in 30.9s
+  Running TypeScript ...

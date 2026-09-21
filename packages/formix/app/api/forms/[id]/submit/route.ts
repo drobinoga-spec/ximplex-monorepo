@@ -32,6 +32,46 @@ export async function POST(
       );
     }
 
+    // ===== NUEVA LÓGICA: Verificar límites =====
+    const { data: profile, error: profileError } = await supabase
+      .from('profiles')
+      .select('subscription_plan, whatsapp_phone')
+      .eq('user_id', form.user_id)
+      .single();
+
+    if (!profile) {
+      return NextResponse.json(
+        { error: 'User profile not found' },
+        { status: 404 }
+      );
+    }
+
+    // Si es plan free, verificar límite de 20 mensajes por mes
+    if (profile.subscription_plan === 'free') {
+      const now = new Date();
+      const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+      const monthEnd = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+
+      const { count, error: countError } = await supabase
+        .from('leads')
+        .select('*', { count: 'exact', head: true })
+        .eq('form_id', formId)
+        .gte('created_at', monthStart.toISOString())
+        .lte('created_at', monthEnd.toISOString());
+
+      if (!countError && count !== null && count >= 20) {
+        return NextResponse.json(
+          { 
+            error: 'Monthly message limit reached',
+            limit_reached: true,
+            message: 'You have reached your free plan limit of 20 messages per month. Please upgrade to continue.'
+          },
+          { status: 429 }
+        );
+      }
+    }
+    // ===== FIN LÓGICA DE LÍMITES =====
+
     // Save lead
     const { data: lead, error: leadError } = await supabase
       .from('leads')
@@ -53,16 +93,9 @@ export async function POST(
       );
     }
 
-    // Get owner's WhatsApp number
-    const { data: profile, error: profileError } = await supabase
-      .from('profiles')
-      .select('whatsapp_phone')
-      .eq('user_id', form.user_id)
-      .single();
-
     // Send WhatsApp notification if number is configured
     let whatsappSent = false;
-    if (profile?.whatsapp_phone) {
+    if (profile.whatsapp_phone) {
       const result = await sendWhatsAppNotification(
         profile.whatsapp_phone,
         form.name,

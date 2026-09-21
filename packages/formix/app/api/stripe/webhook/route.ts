@@ -113,13 +113,11 @@ async function handlePaymentSucceeded(invoice: Stripe.Invoice) {
     if (subscription.items.data.length > 0) {
       const priceId = subscription.items.data[0].price.id;
       console.log('Price ID:', priceId);
-      console.log('Starter price ID:', process.env.NEXT_PUBLIC_STRIPE_STARTER_PRICE_ID);
-      console.log('Pro price ID:', process.env.NEXT_PUBLIC_STRIPE_PRO_PRICE_ID);
 
-      if (priceId === process.env.NEXT_PUBLIC_STRIPE_STARTER_PRICE_ID) {
+    // Ahora solo checkeamos si es monthly o yearly
+      if (priceId === process.env.STRIPE_MONTHLY_PRICE_ID || 
+          priceId === process.env.STRIPE_YEARLY_PRICE_ID) {
         planName = 'starter';
-      } else if (priceId === process.env.NEXT_PUBLIC_STRIPE_PRO_PRICE_ID) {
-        planName = 'pro';
       }
     }
     console.log('Plan name determined:', planName);
